@@ -46,11 +46,11 @@ const Login = ({ navigation }) => {
         source={require('../../src/img/codequiz-logo.png')}
       />
       <DefaultTitle
-        content='Login'
+        content='Sign In'
       />
       <SafeAreaView style={styles.viewContainer}>
         <DefaultInput
-          placeholder='Digite seu e-mail'
+          placeholder='Type your e-mail'
           label='E-mail'
           inputMode='email'
           keyboardType='email-address'
@@ -60,8 +60,8 @@ const Login = ({ navigation }) => {
         />
         <View style={styles.passwordInput}>
           <DefaultInput
-            placeholder='Digite sua senha'
-            label='Senha'
+            placeholder='Type your password'
+            label='Password'
             inputMode='text'
             secureTextEntry={passwordVisibility}
             value={password}
@@ -73,12 +73,14 @@ const Login = ({ navigation }) => {
         </View>
       </SafeAreaView>
       <DefaultButton
-        actionText='Entrar'
+        actionText='Sign In'
         onPress={signIn}
+        backgroundColor='#02577A'
+        borderColor='#02577A'
       />
       <TouchableOpacity onPress={handleSignUp}>
         <DefaultText
-          content='Não tem uma conta? Cadastre-se.'
+          content='New around here? Create account.'
           fontWeight='700'
         />
       </TouchableOpacity>

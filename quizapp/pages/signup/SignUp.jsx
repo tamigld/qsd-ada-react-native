@@ -33,12 +33,12 @@ const SignUp = ({ navigation }) => {
 
     const signUp = () => {
         auth().createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            console.log('user: ', userCredential, 'name: ', name);
-        })
-        .catch((error) => {
-            console.log('erro: ', error);
-        })
+            .then((userCredential) => {
+                console.log('user: ', userCredential, 'name: ', name);
+            })
+            .catch((error) => {
+                console.log('erro: ', error);
+            })
     }
 
     return (
@@ -53,12 +53,12 @@ const SignUp = ({ navigation }) => {
                 source={require('../../src/img/codequiz-logo.png')}
             />
             <DefaultTitle
-                content='Cadastro'
+                content='Sign Up'
             />
             <View style={styles.viewContainer}>
                 <DefaultInput
-                    placeholder='Digite o seu nome completo'
-                    label='Nome completo'
+                    placeholder='Type your full name'
+                    label='Full name'
                     inputMode='none'
                     keyboardType='default'
                     secureTextEntry={false}
@@ -67,7 +67,7 @@ const SignUp = ({ navigation }) => {
                 />
 
                 <DefaultInput
-                    placeholder='Digite seu e-mail'
+                    placeholder='Type your best e-mail'
                     label='E-mail'
                     inputMode='email'
                     keyboardType='email-address'
@@ -78,8 +78,8 @@ const SignUp = ({ navigation }) => {
 
                 <View style={styles.passwordInput}>
                     <DefaultInput
-                        placeholder='Digite sua senha'
-                        label='Senha'
+                        placeholder='Create a password'
+                        label='Password'
                         inputMode='text'
                         secureTextEntry={passwordVisibility}
                         value={password}
@@ -91,12 +91,14 @@ const SignUp = ({ navigation }) => {
                 </View>
             </View>
             <DefaultButton
-                actionText='Cadastrar'
+                actionText='Sign Up'
                 onPress={signUp}
+                backgroundColor='#02577A'
+                borderColor='#02577A'
             />
             <TouchableOpacity onPress={handleLogin}>
                 <DefaultText
-                    content='Já tem uma conta? Faça login.'
+                    content='Already have an account? Sign In.'
                     fontWeight='700'
                 />
             </TouchableOpacity>
@@ -115,7 +117,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 100,
-        backgroundColor:'#edf2f4'
+        backgroundColor: '#edf2f4'
     },
     contentContainer: {
         alignItems: 'center',

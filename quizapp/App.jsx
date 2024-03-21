@@ -26,17 +26,6 @@ const App = () => {
     return unsubscribe;
   }, [])
 
-  const categories = [
-    'HTML5',
-    'CSS3',
-    'JavaScript',
-    'Python',
-    'React',
-    'Angular',
-    'VueJS',
-    'MySQL'
-  ]
-
   const signOut = () => {
     Alert.alert('Sair', 'Tem deseja que deseja sair da sua conta?', [
       {
@@ -56,20 +45,8 @@ const App = () => {
   const CustomDrawerContent = (props) => {
     return (
       <DrawerContentScrollView {...props} contentContainerStyle={styles.drawerContent}>
-        <DrawerItemList {...props}/>
-        <View style={{gap: 10}}>
-        <DrawerTitle content='Categorias' />
-          {
-            categories.map((category, index) => {
-              return(
-                <DrawerItem
-                  style={styles.drawerItem}
-                  label={category}
-                  key={index}
-                />
-              )
-            })
-          }
+        <View>
+          <DrawerItemList {...props}/>
         </View>
         <DrawerItem 
           label='Sair'
@@ -81,13 +58,13 @@ const App = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {/* <StatusBar hidden={true}/> */}
+      <StatusBar backgroundColor={'#edf2f4'}/>
       <NavigationContainer>
         {user ?
           <Drawer.Navigator
             initialRouteName='Dashboard'
             drawerStyle={{
-              backgroundColor: '#000',
+              backgroundColor: '#edf2f4',
               paddingVertical: 20
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}
@@ -115,19 +92,6 @@ const App = () => {
               options={{
                 headerShown: false,
               }}
-              // options= {() => (
-              // {
-              //   headerTitle: '',
-              //   headerStyle: {
-              //     backgroundColor: '#edf2f4',
-              //     borderBottomWidth: 1,
-              //     borderBottomColor: '#02a9f7'
-              //   },
-              //   headerRight: () => (
-              //     <Image style={{width: 40, height: 40}} source={require('./src/img/codequiz-logo.png')}/>
-              //   )
-              // }
-              // )}
             />
           </Drawer.Navigator>
 

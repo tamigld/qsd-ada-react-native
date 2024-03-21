@@ -1,32 +1,76 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, ToastAndroid, View } from 'react-native'
 import React, { useMemo, useState, useEffect } from 'react'
 import { RadioGroup } from 'react-native-radio-buttons-group'
+import DefaultButton from '../defaultButton/DefaultButton'
 
 const QuestionCard = (props) => {
-  const radioButtons = useMemo(() => ([
+  const [isRadioDisabled, setIsRadioDisabled] = useState(false)
+
+  const radioButtons = [
     {
-      id: 1,
-      label: "props.answers['answer_a']",
-      value: 'option1'
+      id: 'answer_a_correct',
+      label: props.answers['answer_a'],
+      value: 'answer_a',
+      disabled: isRadioDisabled
     },
     {
-      id: 2,
-      label: "props.answers['answer_b']",
-      value: 'option2'
+      id: 'answer_b_correct',
+      label: props.answers['answer_b'],
+      value: 'answer_b',
+      disabled: isRadioDisabled
     },
     {
-      id: 3,
-      label: "props.answers['answer_c']",
-      value: 'option2'
+      id: 'answer_c_correct',
+      label: props.answers['answer_c'],
+      value: 'answer_c',
+      disabled: isRadioDisabled
     },
     {
-      id: 4,
-      label: "props.answers['answer_d']",
-      value: 'option2'
+      id: 'answer_d_correct',
+      label: props.answers['answer_d'],
+      value: 'answer_d',
+      disabled: isRadioDisabled
     }
-  ]), [])
+  ]
 
   const [selectedId, setSelectedId] = useState()
+
+  const [isDisabled, setIsDisabled] = useState(Boolean)
+
+  let corrected_answers = props.correct_answers
+
+  const findAnswer = () => {
+    let rightAnswer;
+
+    for (let [key, value] of Object.entries(corrected_answers)) {
+      if (key === selectedId && value === "true") {
+        rightAnswer = key;
+        break;
+      }
+    }
+
+    if (rightAnswer) {
+      showToast('That is correct! 🥳')
+    } else {
+      showToast("Oops! That's not the right one. 😓")
+    }
+    
+    setTimeout(() => {
+      setIsDisabled(true)
+      setIsRadioDisabled(true)
+    }, 1000);
+  }
+
+  const showToast = (text) => {
+    ToastAndroid.showWithGravityAndOffset(
+      text,
+      ToastAndroid.SHORT,
+      ToastAndroid.BOTTOM,
+      25,
+      50,
+    );
+  };
+
 
   return (
     <View style={styles.container}>
@@ -41,10 +85,24 @@ const QuestionCard = (props) => {
           }}
           containerStyle={{
             alignItems: 'flex-start',
-            paddingTop: 10
+            paddingTop: 10,
+            width: '90%'
           }}
         />
       </View>
+      <DefaultButton
+        actionText='Verify'
+        backgroundColor='#02577A'
+        borderColor='#02577A'
+        onPress={() => {
+          if (selectedId == undefined) {
+            showToast('Select one option!')
+          } else {
+            findAnswer()
+          }
+        }}
+        disabled={isDisabled}
+      />
     </View>
   )
 }
@@ -56,7 +114,8 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 1,
     borderColor: '#89d6fb',
-    borderRadius: 5
+    borderRadius: 5,
+    gap: 10
   },
   questionTitle: {
     fontWeight: '700',

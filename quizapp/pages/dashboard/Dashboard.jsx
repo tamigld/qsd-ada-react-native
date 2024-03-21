@@ -9,8 +9,9 @@ const Dashboard = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      console.log('reloaded');
-      setFalseLoading(true)
+      setTimeout(() => {
+        setFalseLoading(true)
+      }, 1000);
     })
 
     return unsubscribe;
@@ -18,95 +19,98 @@ const Dashboard = ({ navigation }) => {
   }, [navigation])
 
   const imagesUrls = [
-    {
-      url: require('../../src/img/html5.png'),
-      name: 'HTML5',
-      page: 'StackHTML',
-      stackCategory: 'HTML',
-      key: 1
-    },
-    {
-      url: require('../../src/img/css3.png'),
-      name: 'CSS3',
-      page: 'StackHTML',
-      stackCategory: 'Css',
-      key: 2
-    },
-    {
-      url: require('../../src/img/js.png'),
-      name: 'JavaScript',
-      page: 'StackHTML',
-      stackCategory: 'JavaScript',
-      key: 3
-    },
-    {
-      url: require('../../src/img/python.png'),
-      name: 'Python',
-      page: 'StackHTML',
-      stackCategory: 'Python',
-      key: 4
-    },
-    {
-      url: require('../../src/img/linux.png'),
-      name: 'Linux',
-      page: 'StackHTML',
-      stackCategory: 'Linux',
-      key: 5
-    },
-    {
-      url: require('../../src/img/php.png'),
-      name: 'PHP',
-      page: 'StackHTML',
-      stackCategory: 'PHP',
-      key: 6
-    },
-    {
-      url: require('../../src/img/wordpress.png'),
-      name: 'Wordpress',
-      page: 'StackHTML',
-      stackCategory: 'Wordpress',
-      key: 7
-    },
-    {
-      url: require('../../src/img/mysql.png'),
-      name: 'MySQL',
-      page: 'StackHTML',
-      stackCategory: 'MySQL',
-      key: 8
-    }
-  ]
+      {
+        url: require('../../src/img/html5.png'),
+        name: 'HTML5',
+        page: 'StackHTML',
+        stackCategory: 'HTML',
+        description: 'HTML5 is the latest evolution of the standard web markup language used to structure and present content on the World Wide Web.',
+        key: 1
+      },
+      {
+        url: require('../../src/img/js.png'),
+        name: 'JavaScript',
+        page: 'StackHTML',
+        stackCategory: 'JavaScript',
+        description: 'JavaScript is a programming language that enables you to implement complex features on web pages.',
+        key: 3
+      },
+      {
+        url: require('../../src/img/python.png'),
+        name: 'Python',
+        page: 'StackHTML',
+        stackCategory: 'Python',
+        description: 'Python is an interpreted, high-level, general-purpose programming language known for its clean syntax and readability.',
+        key: 4
+      },
+      {
+        url: require('../../src/img/linux.png'),
+        name: 'Linux',
+        page: 'StackHTML',
+        stackCategory: 'Linux',
+        description: 'Linux is an open-source Unix-like operating system known for its stability, security, and flexibility.',
+        key: 5
+      },
+      {
+        url: require('../../src/img/php.png'),
+        name: 'PHP',
+        page: 'StackHTML',
+        stackCategory: 'PHP',
+        description: 'PHP is a general-purpose scripting language especially suited to web development that can be embedded into HTML.',
+        key: 6
+      },
+      {
+        url: require('../../src/img/wordpress.png'),
+        name: 'Wordpress',
+        page: 'StackHTML',
+        stackCategory: 'Wordpress',
+        description: 'WordPress is an open-source, freely available content management system that allows you to easily create websites, blogs, or applications.',
+        key: 7
+      },
+      {
+        url: require('../../src/img/mysql.png'),
+        name: 'MySQL',
+        page: 'StackHTML',
+        stackCategory: 'MySQL',
+        description: 'MySQL is an open-source relational database management system widely used for its reliability and ease of use.',
+        key: 8
+      }    
+  ];
+    
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ alignItems: 'center', paddingVertical: 10 }}>
-        <DefaultTitle
-          content='Categorias'
-        />
+return (
+  <SafeAreaView style={styles.container}>
+    <View style={{ alignItems: 'center', paddingVertical: 10 }}>
+      <DefaultTitle
+        content='Categorias'
+      />
+    </View>
+    <ScrollView contentContainerStyle={styles.contentContainerStyle}>
+      <View style={styles.categorieView}>
+        {
+          imagesUrls.map((element, index) => {
+            return (
+              <Card
+                onPress={
+                  () => navigation.navigate(`StackHTML`, {
+                    stackName: element.name,
+                    imageUrl: element.url,
+                    stackCategory: element.stackCategory,
+                    loading: falseLoading
+                  })
+                }
+                key={index}
+                imageUrl={element.url}
+                title={element.name}
+                description={element.description}
+              />
+            )
+          })
+        }
       </View>
-      <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-        <View style={styles.categorieView}>
-          {
-            imagesUrls.map((element, index) => {
-              return (
-                <Card
-                  onPress={
-                    () => navigation.navigate(`StackHTML`, {
-                      stackName: element.name,
-                      imageUrl: element.url,
-                      stackCategory: element.stackCategory,
-                      loading: falseLoading
-                    })
-                  }
-                  key={index}
-                  imageUrl={element.url}
-                />
-              )
-            })
-          }
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  )
+    </ScrollView>
+  </SafeAreaView>
+)
 }
 
 export default Dashboard
@@ -122,13 +126,13 @@ const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     alignItems: 'center',
-    maxHeight: '100%',
     paddingVertical: 20,
     paddingHorizontal: 40,
     gap: 20
   },
   categorieView: {
     flexWrap: 'wrap',
+    width: '100%',
     gap: 20
   }
 })

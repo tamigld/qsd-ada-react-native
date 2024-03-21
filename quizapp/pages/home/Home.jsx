@@ -4,7 +4,7 @@ import DefaultButton from '../../src/components/defaultButton/DefaultButton'
 import React from 'react'
 import DefaultText from '../../src/components/defaultText/DefaultText'
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const handleLogin = () => {
     navigation.navigate('Login')
   }
@@ -16,24 +16,26 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../src/img/codequiz-logo.png')}  
+        source={require('../../src/img/codequiz-logo.png')}
       />
       <Image
-        source={require('../../src/img/codequiz-logomarca.png')}  
+        source={require('../../src/img/codequiz-logomarca.png')}
       />
       <View style={styles.viewContainer}>
         <GhostButton
-          actionText='Fazer login'
+          actionText='Sign In'
           onPress={handleLogin}
         />
         <DefaultButton
-          actionText='Cadastrar'
+          actionText='Sign Up'
           onPress={handleSignUp}
-        /> 
+          backgroundColor='#02577A'
+          borderColor='#02577A'
+        />
       </View>
       <DefaultText
         fontWeight='700'
-        content='Ponha à prova o seu conhecimento tech.'
+        content='Put your tech knowledge to the test and push your limits.'
       />
     </View>
   )
@@ -43,7 +45,7 @@ export default Home
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'#edf2f4',
+    backgroundColor: '#edf2f4',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
